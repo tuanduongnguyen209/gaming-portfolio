@@ -37,7 +37,7 @@ function AboutStage() {
 
                 <div className="dialog-option">
                     <div className="menu p-3">
-                        <MenuItem selected>That's look good! Show me your skills.</MenuItem>
+                        <MenuItem selected>Cool! Show me your skills.</MenuItem>
                         <MenuItem>I don't believe it!</MenuItem>
                         <MenuItem>Back</MenuItem>
                     </div>

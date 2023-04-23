@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import Card, { CardProps } from "../components/Card";
 import PixelFrame from "../components/PixelFrame";
 import Section from "../components/Section";
@@ -32,10 +33,14 @@ function ProjectStage() {
                 <div className="heading-2">Tuan Duong Nguyen</div>
                 <div className="heading-3">⭐⭐⭐ Projects ⭐⭐⭐</div>
 
-                <div className="d-flex">
+                <div className="mt-5 px-5 d-flex justify-content-center gap-4">
                     {cards.map((item, index) => (
                         <Card {...item} key={index} />
                     ))}
+                </div>
+                
+                <div className="mt-auto d-flex justify-content-center p-3">
+                    <Button variant="warning">Go back</Button>
                 </div>
             </PixelFrame>
         </Section>
