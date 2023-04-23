@@ -1,0 +1,25 @@
+.card {
+    border: 4px solid black;
+    border-radius: 0;
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+
+        .card-name {
+            font-size: 25px;
+            font-weight: bold;
+            font-family: "Minecraftia", sans-serif;
+            text-align: center;
+        }
+
+        img {
+            object-fit: cover;
+        }
+
+        .card-description {
+            font-size: 20px;
+            padding: 5px;
+        }
+    }
+}

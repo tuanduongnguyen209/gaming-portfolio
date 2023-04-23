@@ -5,25 +5,28 @@ $button-background: #92CD41;
 $sec-button-background: #76c442;
 $shadow-color:  #4AA52E;
 
-$alt-button-background: #F7D51D;
-$alt-sec-button-background: #F2C409;
+// $alt-button-background: #F7D51D;
+$alt-button-background: rgb(220, 178, 144);;
+// $alt-sec-button-background: #F2C409;
+$alt-sec-button-background: rgba(220, 178, 144, 0.7);;
 $alt-shadow-color:  #E59400;
 
-$reset-button-background: #E76E55;
-$reset-sec-button-background: #CE372B;
-$reset-shadow-color:  #8C2022;
+$error-button-background: #E76E55;
+$error-sec-button-background: #CE372B;
+$error-shadow-color:  #8C2022;
 
 .eightbit-btn {
     background: $button-background;
     display: inline-block;
     position: relative;
     text-align: center;
-    font-size: 30px;
-    padding: 20px;
+    font-size: 15px;
+    padding: 10px;
     font-family: 'Press Start 2P', cursive;
     text-decoration: none; 
     color: white;
     box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow-color;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -58,23 +61,24 @@ $reset-shadow-color:  #8C2022;
         border-right: $outline-width black solid;
     }
 
-    &--reset {
-        background: $reset-button-background;
-        box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $reset-shadow-color;
+    &.error {
+        background: $error-button-background;
+        box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $error-shadow-color;
 
         &:hover,
         &:focus {
-            background: $reset-sec-button-background;
-            box-shadow: inset (-$shadow-width*1.5) (-$shadow-width*1.5) 0px 0px $reset-shadow-color;
+            background: $error-sec-button-background;
+            box-shadow: inset (-$shadow-width*1.5) (-$shadow-width*1.5) 0px 0px $error-shadow-color;
         }
 
         &:active {
-            box-shadow: inset $shadow-width $shadow-width 0px 0px $reset-shadow-color;
+            box-shadow: inset $shadow-width $shadow-width 0px 0px $error-shadow-color;
         }
 
     }
 
-    &--proceed {
+    &.warning {
+        color: #000;
         background: $alt-button-background;
         box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $alt-shadow-color;
 

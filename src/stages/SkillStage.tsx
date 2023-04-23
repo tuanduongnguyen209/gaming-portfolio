@@ -1,3 +1,4 @@
+import Button from "../components/Button";
 import ListItem, { ListItemProps } from "../components/ListItem";
 import PixelFrame from "../components/PixelFrame";
 import Section from "../components/Section";
@@ -99,12 +100,15 @@ function SkillStage() {
         <Section backgroundImage="/public/images/background-01.jpg">
             <PixelFrame>
                 <div className="heading-2">Tuan Duong Nguyen</div>
-                <div className="heading-3">⭐⭐⭐ Achievements ⭐⭐⭐</div>
+                <div className="heading-3">⭐⭐⭐ Badges ⭐⭐⭐</div>
 
                 <div className="mt-5 px-5 skill-list">
                     {languageItems.map((item, index) => (
                         <ListItem key={`language-item-${index}`} {...item} />
                     ))}
+                </div>
+                <div className="d-flex justify-content-center p-3">
+                    <Button variant="warning">Go back</Button>
                 </div>
             </PixelFrame>
         </Section>
