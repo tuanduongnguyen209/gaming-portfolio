@@ -7,6 +7,7 @@ import AboutStage from "./stages/AboutStage";
 import SkillStage from "./stages/SkillStage";
 import ProjectStage from "./stages/ProjectStage";
 import { useMemo } from "react";
+import ContactStage from "./stages/ContactStage";
 
 function App() {
     const ROUTES = useMemo(
@@ -26,6 +27,10 @@ function App() {
             {
                 path: "/projects",
                 element: <ProjectStage />,
+            },
+            {
+                path: "/contact",
+                element: <ContactStage />,
             },
         ],
         []
