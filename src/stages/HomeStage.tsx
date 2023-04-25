@@ -5,8 +5,11 @@ import useSplashScreenContext from "../hooks/useSplashScreenContext";
 
 function HomeStage() {
     const splashScreenContext = useSplashScreenContext();
+    function onReady() {
+        splashScreenContext.setOpen(true);
+    }
     return (
-        <Section backgroundImage="/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg" onReady={onReady}>
             <div className="d-flex flex-column justify-content-center">
                 <div className="heading-1">Tuan Duong Nguyen</div>
                 <div className="heading-2">
@@ -23,7 +26,7 @@ function HomeStage() {
                     />
                 </div>
 
-                <div className="menu" onClick={() => splashScreenContext.setOpen(open => !open)}>
+                <div className="menu" onClick={() => splashScreenContext.setOpen((open) => !open)}>
                     <MenuItem selected>About me</MenuItem>
                     <MenuItem>Experience</MenuItem>
                     <MenuItem>Noteworthy Projects</MenuItem>

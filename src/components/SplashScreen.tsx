@@ -6,7 +6,7 @@ function SplashScreen() {
     return (
         <div className={`splash-screen ${open ? "open" : ""}`}>
             <div className="top" />
-            <div className="bottom"/>
+            <div className="bottom" />
         </div>
     );
 }

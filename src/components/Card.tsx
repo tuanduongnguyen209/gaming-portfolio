@@ -7,7 +7,7 @@ export interface CardProps {
     active?: boolean;
 }
 
-function Card({name, description, imageUrl, active}: CardProps) {
+function Card({ name, description, imageUrl }: CardProps) {
     return (
         <div className="card">
             <div className="card-content">

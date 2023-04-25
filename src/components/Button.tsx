@@ -6,12 +6,8 @@ interface ButtonProps {
     variant: "success" | "warning" | "error";
 }
 
-function Button({children, variant = "success"}: ButtonProps) {
-    return (
-        <div className={`eightbit-btn ${variant}`}>
-            {children}
-        </div>
-    );
+function Button({ children, variant = "success" }: ButtonProps) {
+    return <div className={`eightbit-btn ${variant}`}>{children}</div>;
 }
 
 export default Button;

@@ -25,4 +25,3 @@ function SplashScreenContextProvider({ children }: { children: React.ReactNode }
 }
 
 export default SplashScreenContextProvider;
-
