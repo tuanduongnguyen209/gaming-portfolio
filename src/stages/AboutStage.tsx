@@ -5,9 +5,9 @@ import Typewriter from "typewriter-effect";
 
 function AboutStage() {
     return (
-        <Section backgroundImage="/public/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg">
             <img
-                src="/public/images/pxArt.png"
+                src="/images/pxArt.png"
                 alt="pixel art"
                 width={400}
                 className="left-corner-image"

@@ -1,10 +1,12 @@
 import MenuItem from "../components/MenuItem";
 import Section from "../components/Section";
 import Typewriter from "typewriter-effect";
+import useSplashScreenContext from "../hooks/useSplashScreenContext";
 
 function HomeStage() {
+    const splashScreenContext = useSplashScreenContext();
     return (
-        <Section backgroundImage="/public/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg">
             <div className="d-flex flex-column justify-content-center">
                 <div className="heading-1">Tuan Duong Nguyen</div>
                 <div className="heading-2">
@@ -21,7 +23,7 @@ function HomeStage() {
                     />
                 </div>
 
-                <div className="menu">
+                <div className="menu" onClick={() => splashScreenContext.setOpen(open => !open)}>
                     <MenuItem selected>About me</MenuItem>
                     <MenuItem>Experience</MenuItem>
                     <MenuItem>Noteworthy Projects</MenuItem>
