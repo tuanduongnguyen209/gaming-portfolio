@@ -2,6 +2,8 @@ import Button from "../components/Button";
 import ListItem, { ListItemProps } from "../components/ListItem";
 import PixelFrame from "../components/PixelFrame";
 import Section from "../components/Section";
+import useDebounceNavigate from "../hooks/useDebounceNavigate";
+import useSplashScreenContext from "../hooks/useSplashScreenContext";
 
 const languageItems: ListItemProps[] = [
     {
@@ -96,8 +98,13 @@ const languageItems: ListItemProps[] = [
 ];
 
 function SkillStage() {
+    const navigate = useDebounceNavigate();
+    const splashScreenContext = useSplashScreenContext();
+    function onReady() {
+        setTimeout(() => splashScreenContext.setOpen(true), 200);
+    }
     return (
-        <Section backgroundImage="/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg" onReady={onReady}>
             <PixelFrame>
                 <div className="heading-2">Tuan Duong Nguyen</div>
                 <div className="heading-3">⭐⭐⭐ Badges ⭐⭐⭐</div>
@@ -108,7 +115,9 @@ function SkillStage() {
                     ))}
                 </div>
                 <div className="d-flex justify-content-center p-3">
-                    <Button variant="warning">Go back</Button>
+                    <Button onClick={() => navigate("/")} variant="warning">
+                        Go back
+                    </Button>
                 </div>
             </PixelFrame>
         </Section>

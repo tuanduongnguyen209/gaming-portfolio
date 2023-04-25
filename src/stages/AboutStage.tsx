@@ -1,11 +1,28 @@
-import MenuItem from "../components/MenuItem";
 import PixelFrame from "../components/PixelFrame";
 import Section from "../components/Section";
 import Typewriter from "typewriter-effect";
+import useSplashScreenContext from "../hooks/useSplashScreenContext";
+import NavigationMenu from "../components/NavigationMenu";
+
+const MENU_ITEMS = [
+    {
+        name: "/badges",
+        title: "Cool! Show me your skills.",
+    },
+    {
+        name: "/",
+        title: "I don't believe it!",
+    },
+];
 
 function AboutStage() {
+    const splashScreenContext = useSplashScreenContext();
+    function onReady() {
+        setTimeout(() => splashScreenContext.setOpen(true), 200);
+    }
+
     return (
-        <Section backgroundImage="/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg" onReady={onReady}>
             <img
                 src="/images/pxArt.png"
                 alt="pixel art"
@@ -36,11 +53,7 @@ function AboutStage() {
                 </div>
 
                 <div className="dialog-option">
-                    <div className="menu p-3">
-                        <MenuItem selected>Cool! Show me your skills.</MenuItem>
-                        <MenuItem>{"I don't believe it!"}</MenuItem>
-                        <MenuItem>Back</MenuItem>
-                    </div>
+                    <NavigationMenu className="p-3" menuItems={MENU_ITEMS} />
                 </div>
             </PixelFrame>
         </Section>

@@ -73,50 +73,6 @@ body {
     background: #555;
 }
 
-.menu {
-    margin-top: 30px;
-    padding-left: 30%;
-}
-
-.menu-item {
-    font-size: 20px;
-    color: rgba(0, 0, 0);
-    font-weight: 800;
-    font-family: "Minecraftia", sans-serif;
-    position: relative;
-    cursor: pointer;
-    padding: 10px 20px;
-}
-
-@keyframes selecting {
-    0% {
-        transform: translate(0px, 0px);
-        animation-timing-function: ease-in-out;
-    }
-
-    50% {
-        transform: translate(5px, 0px);
-        animation-timing-function: ease-in-out;
-    }
-
-    100% {
-        transform: translate(0px, 0px);
-        animation-timing-function: ease-in-out;
-    }
-}
-
-.menu-item.selected::before {
-    content: "▶";
-    position: absolute;
-    top: 0.3em;
-    left: -2em;
-    animation: 1s ease-in-out 0.2s infinite alternate selecting;
-}
-
-.menu-item.selected {
-    background-color: rgba(220, 178, 144, 0.7);
-}
-
 $outline-width: 6px;
 $shadow-width: 4px;
 

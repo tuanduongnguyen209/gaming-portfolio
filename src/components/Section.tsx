@@ -12,8 +12,11 @@ function Section(props: SectionProps) {
     useEffect(() => {
         const img = new Image();
         img.src = backgroundImage;
-        img.onload = () => onReady && onReady();
-    }, [backgroundImage, onReady]);
+        img.onload = () => {
+            onReady && onReady();
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div

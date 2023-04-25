@@ -2,6 +2,8 @@ import Button from "../components/Button";
 import Card, { CardProps } from "../components/Card";
 import PixelFrame from "../components/PixelFrame";
 import Section from "../components/Section";
+import useDebounceNavigate from "../hooks/useDebounceNavigate";
+import useSplashScreenContext from "../hooks/useSplashScreenContext";
 
 const cards: CardProps[] = [
     {
@@ -31,8 +33,13 @@ const cards: CardProps[] = [
 ];
 
 function ProjectStage() {
+    const splashScreenContext = useSplashScreenContext();
+    const navigate = useDebounceNavigate();
+    function onReady() {
+        setTimeout(() => splashScreenContext.setOpen(true), 200);
+    }
     return (
-        <Section backgroundImage="/images/background-01.jpg">
+        <Section backgroundImage="/images/background-01.jpg" onReady={onReady}>
             <PixelFrame>
                 <div className="heading-2">Tuan Duong Nguyen</div>
                 <div className="heading-3">⭐⭐⭐ Projects ⭐⭐⭐</div>
@@ -44,7 +51,9 @@ function ProjectStage() {
                 </div>
 
                 <div className="mt-auto d-flex justify-content-center p-3">
-                    <Button variant="warning">Go back</Button>
+                    <Button onClick={() => navigate("/")} variant="warning">
+                        Go back
+                    </Button>
                 </div>
             </PixelFrame>
         </Section>
