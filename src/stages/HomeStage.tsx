@@ -30,7 +30,7 @@ function HomeStage() {
 
     return (
         <Section backgroundImage="/images/background-01.jpg" onReady={onReady}>
-            <div className="d-flex flex-column justify-content-center">
+            <div className="d-flex flex-column justify-content-center p-3">
                 <div className="heading-1">Tuan Duong Nguyen</div>
                 <div className="heading-2">
                     <Typewriter

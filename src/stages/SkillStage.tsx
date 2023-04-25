@@ -109,7 +109,7 @@ function SkillStage() {
                 <div className="heading-2">Tuan Duong Nguyen</div>
                 <div className="heading-3">⭐⭐⭐ Badges ⭐⭐⭐</div>
 
-                <div className="mt-5 px-5 skill-list">
+                <div className="mt-3 mt-lg-5 px-lg-5 overflow-y-auto">
                     {languageItems.map((item, index) => (
                         <ListItem key={`language-item-${index}`} {...item} />
                     ))}
