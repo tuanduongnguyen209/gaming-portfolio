@@ -30,8 +30,7 @@ jobs:
       - name: Production Build
         run: |
           npm run build
-      - name: deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./dist  
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./dist s3://tuan-duong-portfolio-bucket --delete
+      - name: Invalidate cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
