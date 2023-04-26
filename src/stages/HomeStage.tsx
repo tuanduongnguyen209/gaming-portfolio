@@ -2,6 +2,7 @@ import Section from "../components/Section";
 import Typewriter from "typewriter-effect";
 import useSplashScreenContext from "../hooks/useSplashScreenContext";
 import NavigationMenu from "../components/NavigationMenu";
+import Button from "../components/Button";
 
 const MENU_ITEMS = [
     {
@@ -38,15 +39,23 @@ function HomeStage() {
                             cursor: "_",
                         }}
                         onInit={(typewriter) => {
-                            typewriter
-                                .pauseFor(2000)
-                                .typeString("I'm a Full-stack developer")
-                                .start();
+                            typewriter.pauseFor(2000).typeString("I'm a web developer").start();
                         }}
                     />
                 </div>
 
                 <NavigationMenu menuItems={MENU_ITEMS} />
+
+                <div className="top-right">
+                    <Button
+                        variant="success"
+                        href="/TuanDuongNguyen_resume.pdf"
+                        download="TuanDuongNguyen_resume.pdf"
+                    >
+                        <img src="/images/downloading.png" width={20} height={20} />
+                        <span className="ml-1">MY RESUME</span>
+                    </Button>
+                </div>
             </div>
         </Section>
     );

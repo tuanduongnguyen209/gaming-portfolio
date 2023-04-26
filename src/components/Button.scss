@@ -21,10 +21,11 @@ $error-shadow-color:  #8C2022;
     position: relative;
     text-align: center;
     font-size: 15px;
+    font-weight: bold;
     padding: 10px;
     font-family: "Minecraftia", sans-serif;
     text-decoration: none; 
-    color: white;
+    color: black;
     box-shadow: inset (-$shadow-width) (-$shadow-width) 0px 0px $shadow-color;
     cursor: pointer;
 

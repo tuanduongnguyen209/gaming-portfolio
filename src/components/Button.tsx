@@ -1,17 +1,17 @@
 import { ReactNode } from "react";
 import "./Button.scss";
 
-interface ButtonProps {
+interface ButtonProps extends React.HTMLProps<HTMLAnchorElement> {
     children: ReactNode;
     variant: "success" | "warning" | "error";
     onClick?: () => void;
 }
 
-function Button({ children, variant = "success", onClick }: ButtonProps) {
+function Button({ children, variant = "success", onClick, ...rest }: ButtonProps) {
     return (
-        <div className={`eightbit-btn ${variant}`} onClick={onClick}>
+        <a className={`eightbit-btn ${variant}`} onClick={onClick} {...rest}>
             {children}
-        </div>
+        </a>
     );
 }
 
