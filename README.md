@@ -5,7 +5,7 @@ This is a repository for Tuan Duong Nguyen's (Cyan) retro-themed portfolio websi
 ## Preview at:
 [https://www.cyannguyen.dev/](https://www.cyannguyen.dev/)
 
-![Retro Portfolio Website Screenshot](/public/images/thumbnail.png)
+![Retro Portfolio Website Screenshot](/public/images/thumbnail.PNG)
 
 ## Features
 
