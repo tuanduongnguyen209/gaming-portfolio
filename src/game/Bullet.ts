@@ -6,7 +6,7 @@ class Bullet extends GameComponent {
     static readonly WIDTH = 10;
     static readonly HEIGHT = 5;
     static readonly SPEED = 10;
-    static readonly IMAGE_URL = "bullet.png";
+    static readonly IMAGE_URL = "/images/player.svg";
 
     constructor(x: number, y: number, angle: number, ctx: CanvasRenderingContext2D) {
         super(x, y, Bullet.WIDTH, Bullet.HEIGHT, Bullet.IMAGE_URL, ctx);
@@ -15,7 +15,10 @@ class Bullet extends GameComponent {
     }
 
     newPos(): void {
-        // Additional logic specific to Bullet's new position
+        const dx = this.speed * Math.cos(this.angle);
+        const dy = this.speed * Math.sin(this.angle);
+        this.x += dx;
+        this.y += dy;
     }
 }
 

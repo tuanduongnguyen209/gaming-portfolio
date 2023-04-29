@@ -12,36 +12,40 @@ class Plane extends GameComponent {
         [PlaneType.SMALL]: {
             width: 50,
             height: 30,
-            speed: 5,
-            imageUrl: "small_plane.png",
+            speed: 20,
+            imageUrl: "/images/player.svg",
         },
         [PlaneType.MEDIUM]: {
             width: 80,
             height: 40,
-            speed: 7,
-            imageUrl: "medium_plane.png",
+            speed: 20,
+            imageUrl: "/images/player.svg",
         },
         [PlaneType.LARGE]: {
             width: 100,
             height: 60,
-            speed: 10,
-            imageUrl: "large_plane.png",
+            speed: 20,
+            imageUrl: "/images/player.svg",
         },
     };
+    private canvas: HTMLCanvasElement;
 
-    constructor(x: number, y: number, type: PlaneType, ctx: CanvasRenderingContext2D) {
+    constructor(
+        x: number,
+        y: number,
+        type: PlaneType,
+        ctx: CanvasRenderingContext2D,
+        canvas: HTMLCanvasElement
+    ) {
         const { width, height, speed } = Plane.TYPE_SPECS[type];
         const imageUrl = Plane.TYPE_SPECS[type].imageUrl;
         super(x, y, width, height, imageUrl, ctx);
         this.speed = speed;
-    }
-
-    update(): void {
-        this.x += this.speed;
+        this.canvas = canvas;
     }
 
     newPos(): void {
-        // Additional logic specific to Plane's new position
+        this.x -= this.speed;
     }
 }
 

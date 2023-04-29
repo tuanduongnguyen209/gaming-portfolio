@@ -1,16 +1,21 @@
 import GameComponent from "./GameComponent";
 
 class Player extends GameComponent {
-    static readonly WIDTH = 10;
-    static readonly HEIGHT = 5;
+    static readonly WIDTH = 100;
+    static readonly HEIGHT = 200;
     static readonly IMAGE_URL = "/images/player.svg";
+    private canvas: HTMLCanvasElement;
 
-    constructor(x: number, y: number, ctx: CanvasRenderingContext2D) {
-        super(x, y, Player.WIDTH, Player.HEIGHT, Player.IMAGE_URL, ctx);
+    constructor(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+        super(0, 0, Player.WIDTH, Player.HEIGHT, Player.IMAGE_URL, ctx);
+        this.canvas = canvas;
     }
 
     newPos(): void {
-        // Additional logic specific to Player's new position
+        const screenW = this.canvas.width;
+        const screenH = this.canvas.height;
+        this.x = Math.round(screenW / 2) - Math.round(Player.WIDTH / 2);
+        this.y = screenH - Player.HEIGHT - 100;
     }
 }
 
