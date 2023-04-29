@@ -14,20 +14,20 @@ class Plane extends GameComponent {
         [PlaneType.SMALL]: {
             width: 50,
             height: 30,
-            speed: 20,
-            imageUrl: "/images/player.svg",
+            speed: 3,
+            imageUrl: "/images/bomber-small.svg",
         },
         [PlaneType.MEDIUM]: {
             width: 80,
             height: 40,
-            speed: 20,
-            imageUrl: "/images/player.svg",
+            speed: 2,
+            imageUrl: "/images/bomber-medium.svg",
         },
         [PlaneType.LARGE]: {
-            width: 100,
-            height: 60,
-            speed: 20,
-            imageUrl: "/images/player.svg",
+            width: 200,
+            height: 120,
+            speed: 1,
+            imageUrl: "/images/bomber-large.svg",
         },
     };
 

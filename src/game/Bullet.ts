@@ -4,10 +4,10 @@ import GameController from "./GameController";
 class Bullet extends GameComponent {
     speed: number;
     angle: number; // the direction represented as an angle in radians
-    static readonly WIDTH = 10;
+    static readonly WIDTH = 3;
     static readonly HEIGHT = 5;
-    static readonly SPEED = 10;
-    static readonly IMAGE_URL = "/images/player.svg";
+    static readonly SPEED = 4;
+    static readonly IMAGE_URL = "/images/bullet.png";
 
     constructor(x: number, y: number, angle: number, gameController: GameController) {
         super(x, y, Bullet.WIDTH, Bullet.HEIGHT, Bullet.IMAGE_URL, gameController);

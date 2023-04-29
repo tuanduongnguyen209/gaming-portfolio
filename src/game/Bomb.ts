@@ -1,11 +1,11 @@
 import GameComponent from "./GameComponent";
-import GameController from "./GameController";
+import GameController, { GAME_FPS } from "./GameController";
 
 class Bomb extends GameComponent {
-    static readonly WIDTH = 10;
-    static readonly HEIGHT = 5;
-    static readonly SPEED = 10;
-    static readonly IMAGE_URL = "/images/player.svg";
+    static readonly WIDTH = 30;
+    static readonly HEIGHT = 10;
+    static readonly SPEED = 1;
+    static readonly IMAGE_URL = "/images/bomb.png";
     private speed: number;
 
     constructor(x: number, y: number, gameController: GameController) {
@@ -18,8 +18,8 @@ class Bomb extends GameComponent {
         this.y += this.speed;
 
         // check if the bomb is off the bottom of the screen
-        if (this.y > this.ctx.canvas.height) {
-            // this.destroy();
+        if (this.y > this.ctx.canvas.height - 100) {
+            this.destroyIn = this.gameController.getFrameNo() + GAME_FPS * 0.25; // destroy after 0.25s
         }
     }
 }

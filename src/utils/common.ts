@@ -8,3 +8,7 @@ export function getRandomEnumValue<T extends string, TEnumValue extends string>(
     const randomIndex = Math.floor(Math.random() * enumValues.length);
     return enumValues[randomIndex] as TEnumValue;
 }
+
+export function isTouchDevice() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}

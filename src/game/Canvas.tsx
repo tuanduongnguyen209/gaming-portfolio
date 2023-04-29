@@ -1,21 +1,11 @@
-import { useEffect, useRef } from "react";
+import { RefObject } from "react";
 import "./Canvas.scss";
-import GameController from "./GameController";
+interface CanvasProps {
+    canvasRef: RefObject<HTMLCanvasElement>;
+}
 
-interface CanvasProps {}
-
-function Canvas(props: CanvasProps) {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const gameController = new GameController(canvas!);
-        gameController.startGame();
-
-        return () => gameController.stopGame();
-    }, []);
-
-    return <canvas className="game-canvas" ref={canvasRef} {...props} />;
+function Canvas({ canvasRef }: CanvasProps) {
+    return <canvas className="game-canvas" ref={canvasRef} />;
 }
 
 export default Canvas;

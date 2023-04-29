@@ -1,5 +1,8 @@
 import GameController from "./GameController";
 
+const EXPLOSION_IMG = new Image();
+EXPLOSION_IMG.src = "/images/explosion.gif";
+
 abstract class GameComponent {
     x: number;
     y: number;
@@ -31,7 +34,9 @@ abstract class GameComponent {
     }
 
     draw() {
-        if (this.img.complete) {
+        if (this.destroyIn) {
+            this.ctx.drawImage(EXPLOSION_IMG, this.x, this.y, 100, 100);
+        } else if (this.img.complete) {
             this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
     }
@@ -55,7 +60,6 @@ abstract class GameComponent {
         ) {
             crash = false;
         }
-        if (crash) console.log("CRASH");
         return crash;
     }
 
