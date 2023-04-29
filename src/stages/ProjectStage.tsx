@@ -44,10 +44,14 @@ function ProjectStage() {
                 <div className="heading-2">Tuan Duong Nguyen</div>
                 <div className="heading-3">⭐⭐⭐ Projects ⭐⭐⭐</div>
 
-                <div className="mt-5 px-5 d-flex justify-content-center gap-4">
-                    {cards.map((item, index) => (
-                        <Card {...item} key={index} />
-                    ))}
+                <div className="mt-3 mt-lg-5 px-2 px-lg-5 container overflow-y-auto">
+                    <div className="row">
+                        {cards.map((item, index) => (
+                            <div className="col col-lg-3 mb-3" key={index}>
+                                <Card {...item} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="mt-auto d-flex justify-content-center p-3">
