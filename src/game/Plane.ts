@@ -1,4 +1,6 @@
+import Bomb from "./Bomb";
 import GameComponent from "./GameComponent";
+import GameController from "./GameController";
 
 export enum PlaneType {
     SMALL = "small",
@@ -28,24 +30,27 @@ class Plane extends GameComponent {
             imageUrl: "/images/player.svg",
         },
     };
-    private canvas: HTMLCanvasElement;
 
-    constructor(
-        x: number,
-        y: number,
-        type: PlaneType,
-        ctx: CanvasRenderingContext2D,
-        canvas: HTMLCanvasElement
-    ) {
+    constructor(x: number, y: number, type: PlaneType, gameController: GameController) {
         const { width, height, speed } = Plane.TYPE_SPECS[type];
         const imageUrl = Plane.TYPE_SPECS[type].imageUrl;
-        super(x, y, width, height, imageUrl, ctx);
+        super(x, y, width, height, imageUrl, gameController);
         this.speed = speed;
-        this.canvas = canvas;
     }
 
     newPos(): void {
+        if (this.destroyIn) return;
         this.x -= this.speed;
+    }
+
+    public dropBomb(): void {
+        // Calculate the position of the bomb based on the position of the plane
+        const x = this.x + this.width / 2 - Bomb.WIDTH / 2;
+        const y = this.y + this.height;
+
+        // Create a new bomb object and add it to the GameController's array
+        const bomb = new Bomb(x, y, this.gameController);
+        this.gameController.addBomb(bomb);
     }
 }
 

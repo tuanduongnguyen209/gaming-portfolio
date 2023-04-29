@@ -1,4 +1,5 @@
 import GameComponent from "./GameComponent";
+import GameController from "./GameController";
 
 class Player extends GameComponent {
     static readonly WIDTH = 100;
@@ -6,9 +7,9 @@ class Player extends GameComponent {
     static readonly IMAGE_URL = "/images/player.svg";
     private canvas: HTMLCanvasElement;
 
-    constructor(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-        super(0, 0, Player.WIDTH, Player.HEIGHT, Player.IMAGE_URL, ctx);
-        this.canvas = canvas;
+    constructor(gameController: GameController) {
+        super(0, 0, Player.WIDTH, Player.HEIGHT, Player.IMAGE_URL, gameController);
+        this.canvas = gameController.getCanvas();
     }
 
     newPos(): void {

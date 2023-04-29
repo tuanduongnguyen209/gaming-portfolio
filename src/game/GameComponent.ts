@@ -1,3 +1,5 @@
+import GameController from "./GameController";
+
 abstract class GameComponent {
     x: number;
     y: number;
@@ -6,6 +8,8 @@ abstract class GameComponent {
     imageUrl: string;
     ctx: CanvasRenderingContext2D;
     img: HTMLImageElement;
+    gameController: GameController;
+    destroyIn?: number;
 
     constructor(
         x: number,
@@ -13,14 +17,15 @@ abstract class GameComponent {
         width: number,
         height: number,
         imageUrl: string,
-        ctx: CanvasRenderingContext2D
+        gameController: GameController
     ) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.imageUrl = imageUrl;
-        this.ctx = ctx;
+        this.gameController = gameController;
+        this.ctx = gameController.getCtx();
         this.img = new Image();
         this.img.src = imageUrl;
     }
@@ -32,6 +37,7 @@ abstract class GameComponent {
     }
 
     crashWith(otherObj: GameComponent) {
+        if (this.destroyIn || otherObj.destroyIn) return false; // If any object is destroying, no collision
         var myleft = this.x;
         var myright = this.x + this.width;
         var mytop = this.y;
@@ -49,6 +55,7 @@ abstract class GameComponent {
         ) {
             crash = false;
         }
+        if (crash) console.log("CRASH");
         return crash;
     }
 

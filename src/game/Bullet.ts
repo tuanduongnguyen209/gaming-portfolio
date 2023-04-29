@@ -1,4 +1,5 @@
 import GameComponent from "./GameComponent";
+import GameController from "./GameController";
 
 class Bullet extends GameComponent {
     speed: number;
@@ -8,8 +9,8 @@ class Bullet extends GameComponent {
     static readonly SPEED = 10;
     static readonly IMAGE_URL = "/images/player.svg";
 
-    constructor(x: number, y: number, angle: number, ctx: CanvasRenderingContext2D) {
-        super(x, y, Bullet.WIDTH, Bullet.HEIGHT, Bullet.IMAGE_URL, ctx);
+    constructor(x: number, y: number, angle: number, gameController: GameController) {
+        super(x, y, Bullet.WIDTH, Bullet.HEIGHT, Bullet.IMAGE_URL, gameController);
         this.speed = Bullet.SPEED;
         this.angle = angle;
     }

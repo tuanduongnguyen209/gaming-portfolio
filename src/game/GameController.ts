@@ -1,4 +1,5 @@
 import { getRandomEnumValue, getRandomNumber } from "../utils/common";
+import Bomb from "./Bomb";
 import Bullet from "./Bullet";
 import GameComponent from "./GameComponent";
 import Plane, { PlaneType } from "./Plane";
@@ -6,12 +7,13 @@ import Player from "./Player";
 
 const GAME_FPS = 20;
 const ENEMY_SPAWN_INTERVAL_SECONDS = 6;
-const NUMBER_OF_FRAME_TO_SPAWN_A_ENEMY = GAME_FPS * ENEMY_SPAWN_INTERVAL_SECONDS;
-const BULLETS_PER_SECOND = 3;
+const BULLETS_INTERVAL_SECONDS = 0.1;
+const BOMB_DROPED_INTERVAL_SECONDS = 0.3;
 
 class GameController {
     private planes: Plane[];
     private bullets: Bullet[];
+    private bombs: Bomb[] = [];
     private player?: Player;
     private ctx: CanvasRenderingContext2D;
     private canvas: HTMLCanvasElement;
@@ -25,6 +27,7 @@ class GameController {
     constructor(canvas: HTMLCanvasElement) {
         this.planes = [];
         this.bullets = [];
+        this.bombs = [];
         this.isStarted = false;
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d")!;
@@ -38,7 +41,7 @@ class GameController {
         if (!this.ctx) {
             throw new Error("No canvas context attached!");
         }
-        this.player = new Player(this.ctx, this.canvas);
+        this.player = new Player(this);
         this.isStarted = true;
         this.frameNo = 0;
         this.intervalId = setInterval(() => this.gameLoop(), 1000 / GAME_FPS);
@@ -53,6 +56,14 @@ class GameController {
         this.canvas.removeEventListener("mousedown", this.handleMouseDown.bind(this));
         this.canvas.removeEventListener("mouseup", this.handleMouseUp.bind(this));
         this.canvas.removeEventListener("mousemove", this.handleMouseMove.bind(this));
+    }
+
+    getCtx() {
+        return this.ctx;
+    }
+
+    getCanvas() {
+        return this.canvas;
     }
 
     private handleMouseMove(e: MouseEvent) {
@@ -71,10 +82,10 @@ class GameController {
 
     private gameLoop() {
         this.frameNo += 1;
-        if (this.frameNo % NUMBER_OF_FRAME_TO_SPAWN_A_ENEMY === 0) {
+        if (this.everyInterval(ENEMY_SPAWN_INTERVAL_SECONDS)) {
             this.spawnPlane();
         }
-        if (this.isFiring && this.frameNo % BULLETS_PER_SECOND) {
+        if (this.isFiring && this.everyInterval(BULLETS_INTERVAL_SECONDS)) {
             this.addBullet();
         }
         this.update();
@@ -84,7 +95,7 @@ class GameController {
         const x = this.canvas.width;
         const y = getRandomNumber(0, Math.floor(this.canvas.height * 0.6));
         const type = getRandomEnumValue(PlaneType);
-        const plane = new Plane(x, y, type, this.ctx, this.canvas);
+        const plane = new Plane(x, y, type, this);
         this.planes.push(plane);
     }
 
@@ -95,13 +106,17 @@ class GameController {
         }
     }
 
+    public addBomb(bomb: Bomb): void {
+        this.bombs.push(bomb);
+    }
+
     private addBullet(): void {
         const x = this.player?.x || 0 + Math.floor(this.player?.width || 0 / 2);
         const y = this.player?.y || 0;
         const dx = this.cursorX - x;
         const dy = this.cursorY - y;
         const angle = Math.atan2(dy, dx);
-        const bullet = new Bullet(x, y, angle, this.ctx);
+        const bullet = new Bullet(x, y, angle, this);
         this.bullets.push(bullet);
     }
 
@@ -109,6 +124,13 @@ class GameController {
         const index = this.bullets.indexOf(bullet);
         if (index > -1) {
             this.bullets.splice(index, 1);
+        }
+    }
+
+    private removeBomb(bomb: Bomb): void {
+        const index = this.bombs.indexOf(bomb);
+        if (index > -1) {
+            this.bombs.splice(index, 1);
         }
     }
 
@@ -127,6 +149,11 @@ class GameController {
         return false;
     }
 
+    private everyInterval(intervalInSeconds: number) {
+        const totalFrameInEachInterval = Math.floor(GAME_FPS * intervalInSeconds);
+        return this.frameNo % totalFrameInEachInterval === 0;
+    }
+
     private update(): void {
         this.canvas.width = document.body.clientWidth;
         this.canvas.height = document.body.clientHeight;
@@ -135,10 +162,13 @@ class GameController {
         this.player?.draw();
         this.planes.forEach((plane) => {
             plane.newPos();
-            if (this.isOutsideOfScreen(plane)) {
+            if (this.isOutsideOfScreen(plane) || plane.destroyIn === this.frameNo) {
                 this.removePlane(plane);
             } else {
                 plane.draw();
+                if (this.everyInterval(BOMB_DROPED_INTERVAL_SECONDS)) {
+                    plane.dropBomb();
+                }
             }
         });
 
@@ -147,7 +177,28 @@ class GameController {
             if (this.isOutsideOfScreen(bullet)) {
                 this.removeBullet(bullet);
             } else {
+                const terminatedPlane = this.planes.find((plane) => plane.crashWith(bullet));
+                if (terminatedPlane) {
+                    this.removeBullet(bullet);
+                    terminatedPlane.destroyIn = this.frameNo + GAME_FPS * 1; // destroy after 1s
+                    return;
+                }
+                const terminatedBomb = this.bombs.find((bomb) => bomb.crashWith(bullet));
+                if (terminatedBomb) {
+                    this.removeBullet(bullet);
+                    terminatedBomb.destroyIn = this.frameNo + GAME_FPS * 1; // destroy after 1s
+                    return;
+                }
                 bullet.draw();
+            }
+        });
+
+        this.bombs.forEach((bomb) => {
+            bomb.newPos();
+            if (this.isOutsideOfScreen(bomb) || bomb.destroyIn === this.frameNo) {
+                this.removeBomb(bomb);
+            } else {
+                bomb.draw();
             }
         });
     }
