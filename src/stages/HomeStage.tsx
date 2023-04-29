@@ -6,8 +6,12 @@ import Button from "../components/Button";
 
 const MENU_ITEMS = [
     {
+        name: "/play",
+        title: "Play",
+    },
+    {
         name: "/about",
-        title: "About me",
+        title: "About",
     },
     {
         name: "/badges",
